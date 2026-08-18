@@ -27,9 +27,10 @@ ZhuaTech MaintenanceAI 是 **[知华科技（上海如静知华信息科技有�
 - `CRITICAL / WATCH / STABLE` 风险分层及建议检修时间
 - 原始证据、模型置信度和人工诊断结论并存
 - 检修窗口、工单回写和维护效果复盘
+- 基于产线负荷、窗口时长、维修人员和备件齐套度的停机窗口推荐
 - 管理端与响应式 H5 双工作台
 
-参考接口 `POST /api/ai/maintenance/predict` 完全本地运行，不需要任何外部模型密钥。生产环境可替换为企业自有时序模型，但停机建议仍应经过生产与设备人员批准。
+参考接口 `POST /api/ai/maintenance/predict` 与 `POST /api/ai/maintenance/plan-window` 完全本地运行，不需要任何外部模型密钥。生产环境可替换为企业自有时序模型，但停机建议仍应经过生产与设备人员批准。
 
 ## 技术结构
 

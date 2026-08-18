@@ -19,4 +19,10 @@ public class PredictiveMaintenanceController {
         @Valid @RequestBody PredictiveMaintenanceService.Request request) {
         return ApiResponse.ok("设备健康预测完成", service.predict(request));
     }
+
+    @PostMapping("/plan-window")
+    public ApiResponse<PredictiveMaintenanceService.MaintenanceWindowResult> planWindow(
+        @Valid @RequestBody PredictiveMaintenanceService.MaintenanceWindowRequest request) {
+        return ApiResponse.ok("维护窗口规划完成", service.planWindow(request));
+    }
 }

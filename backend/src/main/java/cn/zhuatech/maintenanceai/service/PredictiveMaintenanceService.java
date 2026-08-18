@@ -1,15 +1,20 @@
 /* Copyright 2026 上海如静知华信息科技有限公司 */
 package cn.zhuatech.maintenanceai.service;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -38,6 +43,27 @@ public class PredictiveMaintenanceService {
             risk.equals("STABLE") ? "维持点检计划" : "安排停机窗口并检查轴承、润滑与对中", evidence);
     }
 
+    public MaintenanceWindowResult planWindow(MaintenanceWindowRequest request) {
+        List<CandidateWindow> eligible = request.candidates().stream()
+            .filter(window -> window.durationMinutes() >= request.requiredDurationMinutes())
+            .filter(window -> window.technicianCount() > 0)
+            .sorted(Comparator.comparingInt(CandidateWindow::productionLoadPercent)
+                .thenComparing(CandidateWindow::startTime))
+            .toList();
+        List<String> blockers = new ArrayList<>();
+        if (!request.sparePartsAvailable()) blockers.add("所需备件尚未齐套");
+        if (eligible.isEmpty()) blockers.add("没有同时满足时长与人员要求的停机窗口");
+        if (!blockers.isEmpty()) {
+            return new MaintenanceWindowResult(request.assetCode(), "BLOCKED", "UNAVAILABLE",
+                null, null, 0, blockers, List.of());
+        }
+        CandidateWindow selected = eligible.getFirst();
+        List<String> alternatives = eligible.stream().skip(1).limit(3).map(CandidateWindow::windowId).toList();
+        return new MaintenanceWindowResult(request.assetCode(), "READY", selected.windowId(),
+            selected.startTime(), selected.startTime().plusMinutes(request.requiredDurationMinutes()),
+            selected.productionLoadPercent(), List.of("备件、人员与窗口时长均满足要求"), alternatives);
+    }
+
     public record Request(@NotBlank String assetCode,
                           @DecimalMin("0") BigDecimal vibrationMmPerSecond,
                           @DecimalMin("-50") BigDecimal temperatureCelsius,
@@ -48,4 +74,16 @@ public class PredictiveMaintenanceService {
     public record Result(String assetCode, int riskScore, String riskLevel,
                          int maintenanceWithinHours, BigDecimal confidence,
                          String recommendation, List<String> evidence) {}
+    public record CandidateWindow(@NotBlank String windowId, LocalDateTime startTime,
+                                  @Min(1) int durationMinutes,
+                                  @Min(0) @Max(100) int productionLoadPercent,
+                                  @Min(0) int technicianCount) {}
+    public record MaintenanceWindowRequest(@NotBlank String assetCode,
+                                           @Min(15) int requiredDurationMinutes,
+                                           boolean sparePartsAvailable,
+                                           @NotNull @Size(min = 1, max = 20) List<@Valid CandidateWindow> candidates) {}
+    public record MaintenanceWindowResult(String assetCode, String planningStatus,
+                                          String recommendedWindowId, LocalDateTime startTime,
+                                          LocalDateTime expectedFinishTime, int productionLoadPercent,
+                                          List<String> planningNotes, List<String> alternativeWindowIds) {}
 }

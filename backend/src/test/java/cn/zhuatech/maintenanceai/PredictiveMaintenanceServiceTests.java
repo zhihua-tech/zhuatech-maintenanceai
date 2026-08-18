@@ -4,6 +4,8 @@ package cn.zhuatech.maintenanceai;
 import cn.zhuatech.maintenanceai.service.PredictiveMaintenanceService;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PredictiveMaintenanceServiceTests {
@@ -22,5 +24,17 @@ class PredictiveMaintenanceServiceTests {
             new BigDecimal("52"), 0, 88, 700, 85));
         assertThat(result.riskLevel()).isEqualTo("STABLE");
         assertThat(result.recommendation()).contains("点检");
+    }
+
+    @Test void selectsLowLoadMaintenanceWindowWithRequiredResources() {
+        var result = service.planWindow(new PredictiveMaintenanceService.MaintenanceWindowRequest(
+            "CNC-07", 120, true, List.of(
+                new PredictiveMaintenanceService.CandidateWindow("WIN-A", LocalDateTime.of(2026, 8, 19, 9, 0), 180, 65, 2),
+                new PredictiveMaintenanceService.CandidateWindow("WIN-B", LocalDateTime.of(2026, 8, 19, 13, 0), 150, 20, 1),
+                new PredictiveMaintenanceService.CandidateWindow("WIN-C", LocalDateTime.of(2026, 8, 19, 15, 0), 60, 10, 2)
+            )));
+        assertThat(result.planningStatus()).isEqualTo("READY");
+        assertThat(result.recommendedWindowId()).isEqualTo("WIN-B");
+        assertThat(result.expectedFinishTime()).isEqualTo(LocalDateTime.of(2026, 8, 19, 15, 0));
     }
 }
