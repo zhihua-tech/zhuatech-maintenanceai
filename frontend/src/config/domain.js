@@ -1,4 +1,4 @@
-/* Copyright 2026 上海如静知华信息科技有限公司 */
+/* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 export const domain={
  code:'MAINTENANCEAI',systemName:'知华预测性维护 AI 平台',englishName:'PREDICTIVE MAINTENANCE AI',theme:{primary:'#275d57',dark:'#173b39',accent:'#c78a42'},
  workspace:'制造中心 / 设备智能运维组',fieldWorkspace:'华东工厂 / 设备保障组',period:'2026-08-15 · 实时监测',liveText:'状态数据于 10:36 更新',fieldContextLabel:'当前班次',fieldContext:'早班 08:00—16:00',fieldUser:'周衡',fieldRole:'设备工程师',adminUser:'韩序',adminRole:'可靠性负责人',

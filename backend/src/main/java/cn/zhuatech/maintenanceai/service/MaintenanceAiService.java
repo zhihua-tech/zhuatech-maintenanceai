@@ -1,4 +1,4 @@
-/* Copyright 2026 上海如静知华信息科技有限公司 */
+/* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 package cn.zhuatech.maintenanceai.service;
 import cn.zhuatech.maintenanceai.common.BusinessException; import cn.zhuatech.maintenanceai.dto.MaintenanceAiDto.*; import cn.zhuatech.maintenanceai.model.*; import cn.zhuatech.maintenanceai.repository.*; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; import java.util.*;
 @Service @Transactional(readOnly=true) public class MaintenanceAiService {
