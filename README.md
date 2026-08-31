@@ -65,3 +65,15 @@ npm run dev:demo
 | ![微信咨询二维码一](docs/images/zhuatech-wechat-consulting.png) | ![微信咨询二维码二](docs/images/zhuatech-wechat-consulting-2.png) |
 
 SEO：预测性维护、设备健康管理、故障预测、工业 AI、Java 预测性维护源码、OPC 数据采集、知华科技、上海如静知华信息科技有限公司。
+
+
+## 2026 企业级热度项目升级
+
+本次根据公开仓库访问热度补充 **维修工单就绪与安全放行**：在发布维修工单前校验备件、技能、LOTO、作业许可、停机窗口和外协到场状态。
+
+- 企业 API：`POST /api/enterprise/maintenance/work-order-readiness`
+- 决策输出：执行许可、量化指标、阻断/升级路线、控制清单
+- 可审计性：规则确定、输入输出可留痕，并附正常与阻断场景测试
+- AI 接入：预留 DeepSeek-compatible 建议层配置，AI 不直接绕过审批或改变正式业务状态
+
+详细设计见 [企业级升级说明](docs/ENTERPRISE_UPGRADE.md)。深度开发、企业部署和系统集成请联系[知华科技（上海如静知华信息科技有限公司）](https://www.zhuatech.cn/)。
