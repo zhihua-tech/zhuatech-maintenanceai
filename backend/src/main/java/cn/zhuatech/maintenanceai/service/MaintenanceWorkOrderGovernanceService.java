@@ -9,9 +9,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 企业维修工单就绪门禁，安全条件不满足时禁止派工。 */
+/**
+ * 企业维修工单就绪门禁，安全条件不满足时禁止派工。
+ *
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class MaintenanceWorkOrderGovernanceService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Decision assess(Request request) {
         List<String> blockers = new ArrayList<>();
         if (!request.sparePartsReady()) blockers.add("备件未齐套");
@@ -32,6 +39,9 @@ public class MaintenanceWorkOrderGovernanceService {
                 List.copyOf(blockers), List.copyOf(controls));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Request(@NotBlank String workOrderNo,
                           @Pattern(regexp = "CRITICAL|WATCH|STABLE") String riskLevel,
                           boolean sparePartsReady, @Min(0) int qualifiedTechnicianCount,
@@ -40,6 +50,9 @@ public class MaintenanceWorkOrderGovernanceService {
                           @Min(1) int requiredDurationMinutes,
                           boolean vendorRequired, boolean vendorConfirmed) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Decision(String workOrderNo, String priority, String route,
                            boolean releaseAllowed, List<String> blockers,
                            List<String> controls) {}

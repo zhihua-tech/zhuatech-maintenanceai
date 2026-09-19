@@ -17,8 +17,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class PredictiveMaintenanceService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Result predict(Request request) {
         int score = 0;
         if (request.vibrationMmPerSecond().compareTo(new BigDecimal("7.1")) >= 0) score += 35;
@@ -43,6 +49,9 @@ public class PredictiveMaintenanceService {
             risk.equals("STABLE") ? "维持点检计划" : "安排停机窗口并检查轴承、润滑与对中", evidence);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public MaintenanceWindowResult planWindow(MaintenanceWindowRequest request) {
         List<CandidateWindow> eligible = request.candidates().stream()
             .filter(window -> window.durationMinutes() >= request.requiredDurationMinutes())
@@ -64,6 +73,9 @@ public class PredictiveMaintenanceService {
             selected.productionLoadPercent(), List.of("备件、人员与窗口时长均满足要求"), alternatives);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Request(@NotBlank String assetCode,
                           @DecimalMin("0") BigDecimal vibrationMmPerSecond,
                           @DecimalMin("-50") BigDecimal temperatureCelsius,
@@ -71,17 +83,29 @@ public class PredictiveMaintenanceService {
                           @Min(0) @Max(100) int healthIndex,
                           @Min(0) int runtimeHoursSinceService,
                           @Min(0) @Max(100) int sensorCoveragePercent) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Result(String assetCode, int riskScore, String riskLevel,
                          int maintenanceWithinHours, BigDecimal confidence,
                          String recommendation, List<String> evidence) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record CandidateWindow(@NotBlank String windowId, LocalDateTime startTime,
                                   @Min(1) int durationMinutes,
                                   @Min(0) @Max(100) int productionLoadPercent,
                                   @Min(0) int technicianCount) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record MaintenanceWindowRequest(@NotBlank String assetCode,
                                            @Min(15) int requiredDurationMinutes,
                                            boolean sparePartsAvailable,
                                            @NotNull @Size(min = 1, max = 20) List<@Valid CandidateWindow> candidates) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record MaintenanceWindowResult(String assetCode, String planningStatus,
                                           String recommendedWindowId, LocalDateTime startTime,
                                           LocalDateTime expectedFinishTime, int productionLoadPercent,

@@ -8,9 +8,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 class PredictiveMaintenanceServiceTests {
     private final PredictiveMaintenanceService service = new PredictiveMaintenanceService();
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void escalatesDegradingAsset() {
         var result = service.predict(new PredictiveMaintenanceService.Request("CNC-07", new BigDecimal("8.2"),
             new BigDecimal("91"), 4, 42, 3800, 92));
@@ -19,6 +25,9 @@ class PredictiveMaintenanceServiceTests {
         assertThat(result.evidence()).hasSizeGreaterThanOrEqualTo(3);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void keepsHealthyAssetOnRoutinePlan() {
         var result = service.predict(new PredictiveMaintenanceService.Request("PUMP-02", new BigDecimal("2.1"),
             new BigDecimal("52"), 0, 88, 700, 85));
@@ -26,6 +35,9 @@ class PredictiveMaintenanceServiceTests {
         assertThat(result.recommendation()).contains("点检");
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void selectsLowLoadMaintenanceWindowWithRequiredResources() {
         var result = service.planWindow(new PredictiveMaintenanceService.MaintenanceWindowRequest(
             "CNC-07", 120, true, List.of(
