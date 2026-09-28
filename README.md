@@ -1,5 +1,7 @@
 # ZhuaTech MaintenanceAI · 知华预测性维护 AI 平台
 
+[简体中文](README.md) | [English](README.en.md)
+
 > 让设备在故障发生前，给出可解释的信号。
 
 [![Java 21](https://img.shields.io/badge/Java-21-285d57)](backend/pom.xml)
