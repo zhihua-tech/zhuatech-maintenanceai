@@ -1,5 +1,9 @@
 [简体中文](README.md) | **English**
 
+## Functional update: Asset MTBF and MTTR calculation
+
+Calculates availability, MTBF and MTTR from validated downtime intervals, with explicit undefined metrics when no failures occur. Signed-in users can edit inputs and export real computed results. See [API, examples and limitations](docs/AI_OPERATIONS_UPGRADE_20261023.md). No external model calls or automatic business changes; existing licensing and contacts remain unchanged.
+
 # ZhuaTech MaintenanceAI
 
 > A source-available enterprise project by [ZhuaTech](https://www.zhuatech.cn/) for manufacturing planning, execution, quality, and traceability.

@@ -1,5 +1,9 @@
 # ZhuaTech MaintenanceAI · 知华预测性维护 AI 平台
 
+## 本次功能更新：设备MTBF与MTTR核算
+
+从观察窗口和停机区间计算运行时间、可用率、平均修复时间及平均故障间运行时间，拒绝重叠或越界停机记录。 登录后从「业务计算工具」使用，支持校验与完整结果导出。详见[算法口径、接口和测试说明](docs/AI_OPERATIONS_UPGRADE_20261023.md)。
+
 [简体中文](README.md) | [English](README.en.md)
 
 > 让设备在故障发生前，给出可解释的信号。
