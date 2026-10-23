@@ -1,0 +1,61 @@
+[
+  {
+    "patch": {},
+    "expected": {
+      "decision": "REVIEW",
+      "remainingDays": "#7",
+      "remainingHours": "#50"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "warningDays": "6"
+    },
+    "expected": {
+      "decision": "PASS"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "currentHours": "1200"
+    },
+    "expected": {
+      "decision": "HOLD",
+      "remainingHours": "#0"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "calendarInterval": "23"
+    },
+    "expected": {
+      "decision": "HOLD",
+      "remainingDays": "#0"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "currentHours": "999"
+    },
+    "expected": {},
+    "error": true
+  },
+  {
+    "patch": {
+      "lastService": "2026-10-25"
+    },
+    "expected": {},
+    "error": true
+  },
+  {
+    "patch": {
+      "hourInterval": "0"
+    },
+    "expected": {},
+    "error": true
+  }
+]

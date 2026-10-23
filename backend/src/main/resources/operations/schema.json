@@ -1,0 +1,103 @@
+{
+  "slug": "maintenanceai",
+  "title": "按日历及运行小时双触发保养",
+  "fields": [
+    {
+      "key": "id",
+      "label": "记录编号",
+      "type": "ID"
+    },
+    {
+      "key": "lastService",
+      "label": "上次保养日",
+      "type": "DATE"
+    },
+    {
+      "key": "calendarInterval",
+      "label": "日历保养间隔天",
+      "type": "NUMBER",
+      "scale": 0,
+      "min": "1",
+      "max": "3650"
+    },
+    {
+      "key": "lastHours",
+      "label": "上次表计小时",
+      "type": "NUMBER",
+      "scale": 6,
+      "min": "0",
+      "max": "1000000000000"
+    },
+    {
+      "key": "currentHours",
+      "label": "当前表计小时",
+      "type": "NUMBER",
+      "scale": 6,
+      "min": "0",
+      "max": "1000000000000"
+    },
+    {
+      "key": "hourInterval",
+      "label": "保养间隔小时",
+      "type": "NUMBER",
+      "scale": 6,
+      "min": "0.000001",
+      "max": "1000000000000"
+    },
+    {
+      "key": "warningDays",
+      "label": "到期前预警天",
+      "type": "NUMBER",
+      "scale": 0,
+      "min": "0",
+      "max": "3650"
+    },
+    {
+      "key": "warningHours",
+      "label": "到期前预警小时",
+      "type": "NUMBER",
+      "scale": 6,
+      "min": "0",
+      "max": "1000000000000"
+    }
+  ],
+  "columns": [
+    {
+      "key": "dueDate",
+      "label": "日历到期日"
+    },
+    {
+      "key": "remainingDays",
+      "label": "剩余日历天"
+    },
+    {
+      "key": "remainingHours",
+      "label": "剩余运行小时"
+    },
+    {
+      "key": "dueNow",
+      "label": "已触达保养条件"
+    }
+  ],
+  "description": "取日历到期和运行小时到期任一条件触发保养复核，提前预警，不用其中一个维度覆盖另一个。不会启动设备维护或控制设备。",
+  "owner": "上海如静知华信息科技有限公司",
+  "website": "https://www.zhuatech.cn/",
+  "authorization": "商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。",
+  "version": 1,
+  "notes": "输入均须为已获授权的同口径数据。金额固定人民币元；比例为百分数。核算结果只用于复核，未审批、未写库、未发起外部调用，也未触发付款、签名、资料销毁或设备控制。建议不构成法律、安全、会计或碳核证结论。",
+  "sample": {
+    "asOf": "2026-10-24",
+    "records": [
+      {
+        "id": "ITEM-001",
+        "lastService": "2026-10-01",
+        "calendarInterval": "30",
+        "lastHours": "1000",
+        "currentHours": "1150",
+        "hourInterval": "200",
+        "warningDays": "7",
+        "warningHours": "30"
+      }
+    ]
+  }
+}
